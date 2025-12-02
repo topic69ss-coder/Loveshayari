@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Love & Shayari — Fun Zone</title>
+<meta name="description" content="Love Calculator + Romantic Shayari — made for fun. Open an ad to continue." />
+<style>
+:root{--accent:#ff4d88;--accent2:#6c5ce7;--muted:#6b7280}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#fff6fb,#fff);color:#111}
+.container{max-width:920px;margin:18px auto;padding:18px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent2),var(--accent));display:flex;align-items:center;justify-content:center;color:white;font-weight:800}
+h1{margin:0;font-size:20px}
+.lead{color:var(--muted);font-size:13px;margin-top:6px}
+.card{background:white;border-radius:12px;padding:14px;box-shadow:0 12px 30px rgba(15,15,40,0.06);margin-top:14px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.input{width:100%;padding:10px;border-radius:10px;border:1px solid #eee;font-size:14px}
+.label{font-weight:700;font-size:13px}
+.btn{padding:10px 14px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent2),var(--accent));color:white;font-weight:700;cursor:pointer}
+.small{font-size:13px;color:var(--muted)}
+.progressWrap{margin-top:12px}
+.progressBar{width:100%;height:12px;background:#f0efff;border-radius:10px;overflow:hidden}
+.progressFill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:width .25s}
+.about-panel{position:fixed;left:12px;top:72px;min-width:260px;max-width:360px;background:white;border-radius:10px;padding:12px;box-shadow:0 18px 40px rgba(12,20,40,0.16);display:none;z-index:10002;font-size:14px}
+.about-close{position:absolute;right:8px;top:8px;background:#f0f2f7;border:0;padding:6px;border-radius:8px;cursor:pointer}
+.footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
+.ad-placeholder{background:#fff0f6;border-radius:8px;padding:8px;text-align:center;color:var(--muted);margin-top:12px;border:1px dashed #ffd6ea}
+.note{font-size:12px;color:var(--muted);margin-top:10px}
+.shayariBox{background:#fff7fb;padding:12px;border-radius:10px;margin-top:12px}
+.copyList{max-height:220px;overflow:auto;margin-top:10px;border-radius:8px;padding:8px;background:#fff}
+.copyItem{padding:6px 8px;border-radius:6px;background:#fff;color:#111;border:1px solid #f0e9f2;margin-bottom:6px;display:block}
+@media(max-width:760px){header{flex-direction:column;align-items:flex-start;gap:8px}}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="brand">
+      <div class="logo">❤</div>
+      <div>
+        <h1>Love & Shayari</h1>
+        <div class="lead">Love calculator + romantic shayari — made for fun. Try it 😀.</div>
+      </div>
+    </div>
+
+    <!-- three-dots menu -->
+    <div>
+      <button id="menuBtn" style="background:transparent;border:0;font-size:22px;cursor:pointer">⋮</button>
+    </div>
+  </header>
+
+  <!-- Top banner ad placeholder (paste ad script here) -->
+  <div class="ad-placeholder" id="topAd">
+     <script type="text/javascript">
+          atOptions = {
+            'key' : 'c533f92842a99236b1cb6736b289861e',
+            'format' : 'iframe',
+            'height' : 50,
+            'width' : 250,
+            'params' : {}
+          };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/c533f92842a99236b1cb6736b289861e/invoke.js"></script>
+    <!-- PASTE TOP NATIVE BANNER SCRIPT HERE -->
+    <!-- Example (paste your native banner script here):
+    <script type="text/javascript"> atOptions = { 'key' : 'c533f92842a99236b1cb6736b289861e', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} }; </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/c533f92842a99236b1cb6736b289861e/invoke.js"></script>
+    
+    -->
+    
+  </div>
+
+  <!-- main card -->
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <div style="flex:1;min-width:240px">
+        <div class="label">Your name</div>
+        <input id="name1" class="input" placeholder="e.g. Priya" />
+      </div>
+      <div style="flex:1;min-width:240px">
+        <div class="label">Partner's name</div>
+        <input id="name2" class="input" placeholder="e.g. Rohit" />
+      </div>
+    </div>
+
+    <div style="margin-top:12px" class="label">Choose a shayari theme (or random)</div>
+    <select id="shayariTheme" class="input">
+      <option value="random">Random Romantic</option>
+      <option value="classic">Classic Romantic</option>
+      <option value="short">Short & Sweet</option>
+      <option value="deep">Deep Feelings</option>
+    </select>
+
+    <div style="display:flex;gap:10px;margin-top:12px;align-items:center">
+      <button id="generateBtn" class="btn">Generate Love & Shayari</button>
+      <button id="previewBtn" class="btn" style="background:linear-gradient(90deg,#00b894,#00cec9)">Preview Shayari</button>
+      <label style="margin-left:8px"><input type="checkbox" id="emojiToggle"> <span class="small">Add emojis</span></label>
+    </div>
+
+    <div class="progressWrap" id="progressWrap" style="display:none">
+      <div class="small" id="progressText">Preparing your love…</div>
+      <div class="progressBar" style="margin-top:8px"><div id="progressFill" class="progressFill"></div></div>
+      <div class="small note" id="progressNote">A little patience — your love score is being calculated. 💖</div>
+    </div>
+
+    <div class="shayariBox" id="shayariPreview" style="display:none">
+      <div class="label">Shayari preview</div>
+      <div id="shayariText" style="margin-top:8px;line-height:1.5"></div>
+    </div>
+
+    <hr style="margin-top:12px;border:none;border-top:1px solid #fbecf1" />
+
+    <div class="label">100-words copier (one per line)</div>
+    <textarea id="userWords" class="input" placeholder="Enter words or short phrases separated by commas. Example: I love you, Sorry, Miss you"></textarea>
+    <div style="display:flex
+    ;margin-top:8px;align-items:center">
+      <button id="makeListBtn" class="btn secondary">Make 100-line list</button>
+      <button id="copyAllWordsBtn" class="btn" style="background:#444">Copy All (opens ad)</button>
+    </div>
+
+    <div class="copyList" id="wordsList" style="display:none"></div>
+
+    <div class="note">Note: This tool is for fun. <strong>Made for fun — don’t take it seriously.</strong></div>
+  </div>
+
+  <div class="footer">
+    <div class="small">Made for fun — built by Saikiran. <span id="aboutLink" style="color:var(--accent);cursor:pointer">About</span></div>
+  </div>
+</div>
+
+<!-- About panel -->
+<div class="about-panel" id="aboutPanel" role="dialog"  aria-label="About">
+  <button class="about-close" id="closeAbout">✕</button>
+  <h4>About this project</h4>
+  <p><strong>Developer:</strong> Saikiran Jinde</p>
+  <p><strong>Email:</strong> <a href="mailto:saikiranjinde49@gmail.com">saikiranjinde49@gmail.com</a></p>
+  <p>This site is a playful Love Calculator + Shayari generator. made for fun only !. Made for fun — do not take it seriously.</p>
+  <p>Instagram: <a href="https://instagram.com/saikiran.jinde_2706" target="_blank">@saikiran.jinde_2706</a></p>
+</div>
+
+<!-- manual ad modal (if popup blocked) -->
+<div id="manualModal" style="display:none;position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(0,0,0,0.5);align-items:center;justify-content:center;z-index:9999">
+  <div style="background:white;padding:16px;border-radius:10px;max-width:420px;margin:16px">
+    <h3>Open Ad</h3>
+    <p class="small">Your browser blocked the ad popup. Tap the link below to open the ad — after you come back the result will appear.</p>
+    <h3>Please open one more time to see Results 🔥 </h3>
+    <a id="manualAdLink" href="#" target="_blank" style="color:var(--accent);font-weight:700">Open Ad</a>
+    <div style="text-align:right;margin-top:10px"><button id="manualClose" class="btn" style="background:#ddd;color:#111">Close</button></div>
+  </div>
+</div>
+
+<script>
+/* ---------- Config: put your ad smartlink or social bar here ---------- */
+const SMART_LINK = 'https://www.effectivegatecpm.com/z1he616vq?key=f8ccc658bd057c3893c8b07479df0378';
+const SOCIAL_SCRIPT = '//pl28167123.effectivegatecpm.com/d1/7d/fb/d17dfb708c5e932f8a0243b86dfdd21d.js'; // optional social bar
+
+/* ---------- Shayari banks (Hinglish romantic) ---------- */
+const SHAYARIS = {
+  random:[
+    "Tere bina lagta hai kuch adhoora sa, tum ho to har pal poora sa. ❤️",
+    "Chand bhi sharma jaye tumhari muskurahat ke saamne, main toh bas tumhara hoon sada ke liye.",
+    "Tum mile to zindagi mein rang aa gaye, ab tumhare bina sab suna suna sa lage.",
+    "Tere naam se shuru hoti hai meri subah, tere khayal se khatam hoti hai meri raat.",
+    "Pal pal dil ke paas tum rehti ho, main bas tumhari dhadkan ban kar rahu."
+  ],
+  classic:[
+    "Ishq ka dariya hai, hum doob na jaye, bas tum saath ho toh sab kuch theek ho jaye.",
+    "Teri har aadat mujhko pyaari lagti hai, chahe woh khamoshi ho ya mithi si baat.",
+    "Tum nazron mein ho, khayalon mein ho, jaane alvida kehna mana hai.",
+    "Tere bina zindagi adhoori, tum hi toh ho meri pukaar.",
+    "Aankhon mein base ho tum, saanson mein basi ho tum — zindagi tum ho."
+  ],
+  short:[
+    "Tum hi ho. ❤️",
+    "Bas tum aur main.",
+    "Tumse milke laga mil gaya jahaan.",
+    "Tere bina adhura main.",
+    "Sath chalein hum, hamesha."
+  ],
+  deep:[
+    "Tumhari khamoshi mere liye geet ban jaati hai, main usi mein apne armaan bhool jaata hoon.",
+    "Waqt ne dikhaya tumko chhod ke chalne ka andaz, phir bhi dil tumko chahne se rukta nahi.",
+    "Woh pal jab tumne haath thaama, lagta tha waqt ruk gaya — bas tum hi tum.",
+    "Har dhadkan tumhara naam leti hai, har soch tum par khatam hoti hai.",
+    "Tum mere sapnon ka hunnar ho, aur main tumhara intezaar.","Tere bina jo lamha guzarta hai, wo waqt bhi mujhse sharmata hai... Tujhe paake lagta hai, zindagi ne aaj mujhe khud se milaya hai.",
+    
+    
+  ]
+};
+
+/* ---------- Helpers ---------- */
+function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+function safeText(s){ return (s||'').toString(); }
+
+/* ---------- Love calculator formula (friendly, biased-up) ---------- */
+function loveScore(a,b){
+  a = safeText(a).toLowerCase().replace(/\s+/g,'');
+  b = safeText(b).toLowerCase().replace(/\s+/g,'');
+  if(!a || !b) return Math.floor(60 + Math.random()*25); // default friendly score
+  // base from char codes
+  let s1 = 0, s2=0;
+  for(let ch of a) s1 += ch.charCodeAt(0);
+  for(let ch of b) s2 += ch.charCodeAt(0);
+  let base = Math.abs(s1 - s2) % 21; // 0..20
+  // compute combined factor
+  let common = 0;
+  for(let ch of a) if(b.includes(ch)) common++;
+  let percent = 60 + (common*6) + (20 - base); // biased towards higher
+  // small random friendly jitter
+  percent = percent + Math.floor((Math.random()*11)-3); // -3..+7
+  percent = Math.max(35, Math.min(99, Math.round(percent)));
+  return percent;
+}
+
+/* ---------- UI flow: generate -> open ad -> progress -> save data -> navigate to result ---------- */
+const generateBtn = document.getElementById('generateBtn');
+const previewBtn = document.getElementById('previewBtn');
+const manualModal = document.getElementById('manualModal');
+const manualAdLink = document.getElementById('manualAdLink');
+const manualClose = document.getElementById('manualClose');
+
+let adShown = false;
+let pendingAction = null;
+
+function openAdAndProceed(action){
+  // try to open ad tab
+  const w = window.open(SMART_LINK, '_blank', 'noopener,noreferrer');
+  if(w){
+    // try to write social script in new tab (best-effort)
+    try{
+      w.document.write('<html><head><title>Ad</title></head><body><div>Loading ad...</div></body></html>');
+      const s = w.document.createElement('script'); s.src = SOCIAL_SCRIPT; s.async=true; w.document.body.appendChild(s);
+    }catch(e){ try{ w.location.href = SMART_LINK; }catch(_){} }
+    adShown = true;
+    // run action shortly after opening
+    setTimeout(()=> action(), 300);
+  } else {
+    // popup blocked — show manual modal
+    pendingAction = action;
+    manualModal.style.display = 'flex';
+    manualAdLink.href = SMART_LINK;
+  }
+}
+
+manualClose.addEventListener('click', ()=> { manualModal.style.display='none'; pendingAction=null; });
+manualAdLink.addEventListener('click', ()=> {
+  adShown = true;
+  setTimeout(()=> { if(pendingAction) { pendingAction(); pendingAction = null; } manualModal.style.display='none'; }, 700);
+});
+
+/* Preview shayari */
+previewBtn.addEventListener('click', ()=>{
+  const theme = document.getElementById('shayariTheme').value;
+  const list = SHAYARIS[theme] || SHAYARIS.random;
+  const text = pick(list);
+  const emojis = document.getElementById('emojiToggle').checked;
+  document.getElementById('shayariText').innerText = emojis ? text + ' ❤️' : text;
+  document.getElementById('shayariPreview').style.display = 'block';
+});
+
+/* Generate behavior */
+generateBtn.addEventListener('click', ()=>{
+  // gather inputs
+  const n1 = document.getElementById('name1').value.trim() || 'You';
+  const n2 = document.getElementById('name2').value.trim() || 'Partner';
+  const theme = document.getElementById('shayariTheme').value;
+  const emojis = document.getElementById('emojiToggle').checked;
+  const wordsRaw = document.getElementById('userWords').value.trim();
+
+  // action to run after ad (or immediately if ad opened)
+  const action = ()=>{
+    // show progress UI
+    document.getElementById('progressWrap').style.display = 'block';
+    const fill = document.getElementById('progressFill');
+    const pText = document.getElementById('progressText');
+    const notes = [
+      "Calculating star alignment…",
+      "Mixing romantic vibes…",
+      "Checking heartbeats…",
+      "Weaving shayari lines…",
+      "Almost there — hold on!"
+    ];
+    let pct = 0;
+    fill.style.width = '0%';
+    pText.innerText = pick(notes);
+
+    // generate data
+    const score = loveScore(n1,n2);
+    const shList = SHAYARIS[theme] || SHAYARIS.random;
+    const selectedShayari = pick(shList) + (emojis ? ' ❤️' : '');
+
+    // prepare 100 words list
+    const seeds = wordsRaw ? wordsRaw.split(',').map(s=>s.trim()).filter(Boolean) : ['I love you','Sorry','Miss you','Forever','Trust','Hug','Kiss','Together','Always','My heart'];
+    // rotate and generate until 100 items
+    const fullList = [];
+    while(fullList.length < 100){
+      for(let s of seeds){
+        if(fullList.length>=100) break;
+        fullList.push(s);
+      }
+      // if seeds were few, add generated small phrases
+      if(seeds.length === 0){
+        fullList.push('I love you');
+      }
+    }
+
+    // simulate progressive loading
+    const interval = setInterval(()=>{
+      pct += Math.floor(8 + Math.random()*12);
+      if(pct >= 100) pct = 100;
+      fill.style.width = pct + '%';
+      pText.innerText = (pct<100) ? pick(notes) : 'Done! Redirecting…';
+      if(pct >= 100){
+        clearInterval(interval);
+        // save to localStorage for result page
+        const payload = {name1:n1,name2:n2,score:score,shayari:selectedShayari,words:fullList, time:Date.now()};
+        try{ localStorage.setItem('love_payload', JSON.stringify(payload)); }catch(e){}
+        // navigate to result page
+        setTimeout(()=> { window.location.href = 'result.html'; }, 450);
+      }
+    }, 380);
+  };
+
+  // open ad then proceed
+  openAdAndProceed(action);
+});
+
+/* 100-list maker */
+document.getElementById('makeListBtn').addEventListener('click', ()=>{
+  const wordsRaw = document.getElementById('userWords').value.trim();
+  const seeds = wordsRaw ? wordsRaw.split(',').map(s=>s.trim()).filter(Boolean) : ['I love you','Sorry','Miss you','Forever'];
+  const fullList = [];
+  while(fullList.length < 100){
+    for(let s of seeds){
+      if(fullList.length>=100) break;
+      fullList.push(s);
+    }
+    if(seeds.length === 0) fullList.push('I love you');
+  }
+  const container = document.getElementById('wordsList');
+  container.innerHTML = '';
+  for(let i=0;i<fullList.length;i++){
+    const div = document.createElement('div');
+    div.className = 'copyItem';
+    div.innerText = fullList[i];
+    container.appendChild(div);
+  }
+  container.style.display = 'block';
+});
+
+/* Copy All words (opens ad first) */
+document.getElementById('copyAllWordsBtn').addEventListener('click', ()=>{
+  openAdAndProceed(()=>{
+    const items = Array.from(document.querySelectorAll('#wordsList .copyItem')).map(d=>d.innerText).join('\\n');
+    navigator.clipboard.writeText(items).then(()=> alert('Sorry couples i cant copy so select and copy '));
+  });
+});
+
+/* About panel toggle */
+document.getElementById('menuBtn').addEventListener('click', ()=> {
+  const p = document.getElementById('aboutPanel');
+  p.style.display = (p.style.display==='block') ? 'none' : 'block';
+});
+document.getElementById('closeAbout').addEventListener('click', ()=> document.getElementById('aboutPanel').style.display='none');
+
+</script>
+</body>
+</html>
